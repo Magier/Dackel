@@ -1,0 +1,28 @@
+id: arst
+name: Well-know scanner detected
+status: experimental
+author: me
+version: 1.0
+date: 2024-11-29
+confidence: 0.8
+variables:
+  known_scanners: ["nmap", "fierce", "kportscan", "ladon", "masscan", "p0f", "fscan", "unicornscan", "zmap", "zgrab"]
+description: "arstars"
+query: >
+    event.type == event_exec && (
+      event.exec.file_details.category == category_discovery ||
+      known_scanners.exists_one(v, event.process.name.contains(v) || event.exec.path.lowerAscii().contains(v) ||  
+        event.exec.args.exists_one(arg, arg.lowerAscii().contains(v))
+      )
+    )
+tags: 
+  - attack.execution
+data_source:
+  category: process_creation
+level: low
+references:
+  - arst
+robustness: 3U
+false_positives:
+blindspots:
+response_plan: 

@@ -1,0 +1,20 @@
+[project]
+name = "dackel"
+version = "0.1.0"
+description = "Detection As Code for Kubernetes Events and Logs"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "pyaml>=24.9.0",
+    "pydantic-yaml>=1.4.0",
+    "pydantic>=2.10.2",
+    "python-dotenv>=1.0.1",
+    "requests>=2.32.3",
+    "typer>=0.14.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3.3",
+    "ruff>=0.8.1",
+]
