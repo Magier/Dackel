@@ -54,10 +54,10 @@ def convert_rule(rule: Rule) -> CastAiRule:
     category = "event" if rule.data_source.get("category", "event") == "process_creation" else "event"
 
     return CastAiRule(
-        # id=rule.id,
+        id=rule.id,
         enabled=True,  # Assuming the rule is enabled by default
         name=rule.name,
-        # type="custom",  # Assuming a default type
+        type="custom",  # Assuming a default type
         category=category,
         severity="SEVERITY_" + rule.level.upper(),
         resource_selector="",  # Assuming no resource selector
@@ -65,7 +65,7 @@ def convert_rule(rule: Rule) -> CastAiRule:
         labels={
             "author": rule.author,
             "version": rule.version,
-            "confidence": rule.confidence,
+            "confidence": str(rule.confidence),
             "robustness": rule.robustness,
         },
     )

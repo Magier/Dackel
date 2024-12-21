@@ -1,13 +1,11 @@
 from pathlib import Path
 from typing import Annotated
 import typer
-from dotenv import load_dotenv
 import yaml
 
 from endpoints.cast import CastAiApi
 from rule import Rule
 
-load_dotenv()
 
 app = typer.Typer()
 
@@ -22,17 +20,16 @@ def load_rules() -> list[Rule]:
     return rules
 
 
-@app.command()
-def main(
+@app.command(name="castai")
+def upsert_castai(
     api_server: Annotated[str, typer.Argument(envvar="CAST_API")],
     api_token: Annotated[str, typer.Argument(envvar="CAST_TOKEN")],
 ):
+    """
+    Updates and/or inserts any new rules to the specified detection system.
+    """
     rules = load_rules()
     cast = CastAiApi(server=api_server, token=api_token)
     cast.upsert_rules(rules)
     new_rules = cast.get_rules()
     print(f"Got {len(new_rules)} rules!")
-
-
-if __name__ == "__main__":
-    app()

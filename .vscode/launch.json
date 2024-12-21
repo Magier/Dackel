@@ -8,9 +8,11 @@
 			"name": "Debug main",
 			"type": "debugpy",
 			"request": "launch",
-			"program": "src/app.py",
+			"program": "src",
 			"console": "integratedTerminal",
-			"args": []
+			"args": [
+				"sync"
+			]
 		}
 	]
 }
