@@ -5,13 +5,14 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
-			"name": "Debug main",
+			"name": "Sync",
 			"type": "debugpy",
 			"request": "launch",
 			"program": "src",
 			"console": "integratedTerminal",
 			"args": [
-				"sync"
+				"sync",
+				"all"
 			]
 		}
 	]
